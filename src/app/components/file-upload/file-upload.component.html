@@ -1,0 +1,6 @@
+<div class="file-input">
+  <span>Choose file</span>
+  <span>or</span>
+  <span>{{file ? '   ' + file.name : 'drag and drop file here' }}</span>
+  <input class="align" type="file" (change)="onFileSelected($event)">
+</div>

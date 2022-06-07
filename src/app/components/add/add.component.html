@@ -1,0 +1,55 @@
+<form *ngIf="user" [formGroup]="pictureForm" class="post-form mt-5">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img [src]="user.photoURL" class="avatar" alt=""/>
+      </div>
+      <mat-card-title>Add Book to Shelf 📖</mat-card-title>
+      <mat-card-subtitle>{{ user.displayName }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-progress-bar *ngIf="submitted" [value]="uploadProgress$ | async" mode="determinate">
+    </mat-progress-bar>
+    <mat-card-content>
+
+
+      <mat-form-field class="columns">
+        <mat-label *ngIf="pictureForm.get('photo')?.value; else newFile">{{pictureForm.get('photo')?.value.name}}</mat-label>
+        <ng-template #newFile>
+          <mat-label>Select Book</mat-label>
+        </ng-template>
+        <input matInput formControlName="photo" hidden>
+        <app-file-upload formControlName="photo"></app-file-upload>
+        <mat-error *ngIf="pictureForm.controls['photo'].hasError('required')">
+          Please select a book to upload
+        </mat-error>
+        <mat-error *ngIf="pictureForm.controls['photo'].hasError('fileType')">
+          Format not supported!
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name your <strong>BOOK</strong></mat-label>
+        <textarea
+          formControlName="description"
+          matInput
+          placeholder="Name your Book 📖"
+        >
+        </textarea>
+        <mat-error *ngIf="pictureForm.controls['description'].hasError('required')">
+          You <strong>SHOULD</strong> name your Book
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        (click)="addBook()"
+        [disabled]="pictureForm.invalid || submitted"
+        color="primary"
+        mat-raised-button>
+        Add Book
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "learing-angular": {
+      "hosting": {
+        "BoRd": [
+          "learing-angular"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "learing-angular"
+  }
+}

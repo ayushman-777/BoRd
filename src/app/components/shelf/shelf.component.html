@@ -1,0 +1,33 @@
+<div *ngIf="user else noUser">
+  <div *ngIf="selectedBook else bookList">
+    <span role="button" (click)="openSelf()"
+          class="material-icons position-fixed ms-1 mt-3 text-primary">arrow_back</span>
+    <ngx-doc-viewer
+      class="mx-5"
+      style="height: 90vh"
+      viewer="pdf"
+      [url]="selectedBook"
+    ></ngx-doc-viewer>
+  </div>
+
+  <ng-template #bookList>
+    <div class="container">
+      <div class="row mt-5">
+        <div *ngFor="let book of books" class="col">
+          <div class="card text-dark bg-light mb-3 overflow-auto hide-scrollBars" style="width: 18rem; height: 9rem;"
+               role="button" (click)="openBook(book)">
+            <div class="card-header d-flex justify-content-center">
+              <span class="img-fluid rounded-start material-icons md-48">picture_as_pdf</span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{book.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<ng-template #noUser>
+  <div class="d-flex justify-content-center align-items-center mt-4"><img class="img-fluid" src="./assets/bookshelf.svg" alt="Login To continue"></div>
+</ng-template>

@@ -1,0 +1,32 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <button mat-button matTooltip="Home" routerLink="/shelf">
+      <mat-icon color="primary" class="material-icons">book</mat-icon> Shelf
+    </button>
+
+
+    <span class="spacer"></span>
+
+    <img src="./assets/bord-trans.gif" alt="Book Read">
+
+    <span class="spacer"></span>
+
+
+    <ng-container *ngIf="user | async as user; else loginIcon">
+      <button mat-icon-button matTooltip="Add a Book 📔" routerLink="/add">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Add a Book 📔">
+          cloud_upload
+        </mat-icon>
+      </button>
+
+      <app-profile-card (logoutClick)="logout()" [user]="user"></app-profile-card>
+    </ng-container>
+    <ng-template #loginIcon>
+      <button (click)="login()" mat-icon-button matTooltip="Login">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Login">
+          input
+        </mat-icon>
+      </button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>
